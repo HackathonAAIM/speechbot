@@ -60,6 +60,11 @@
             <groupId>org.apache.sling</groupId>
             <artifactId>org.apache.sling.jcr.api</artifactId>
         </dependency>
+        <dependency>
+			<groupId>com.google.cloud</groupId>
+			<artifactId>google-cloud-speech</artifactId>
+			<version>0.17.1-alpha</version>
+		</dependency>
     </dependencies>
 
     <!-- ====================================================================== -->
