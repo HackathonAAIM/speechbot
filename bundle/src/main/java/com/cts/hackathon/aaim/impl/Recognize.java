@@ -11,7 +11,7 @@
   limitations under the License.
 */
 
-package com.example.speech;
+package com.cts.hackathon.aaim.impl;
 
 import com.google.api.gax.grpc.ApiStreamObserver;
 import com.google.api.gax.grpc.OperationFuture;
@@ -21,7 +21,6 @@ import com.google.cloud.speech.v1.RecognitionAudio;
 import com.google.cloud.speech.v1.RecognitionConfig;
 import com.google.cloud.speech.v1.RecognitionConfig.AudioEncoding;
 import com.google.cloud.speech.v1.RecognizeResponse;
-import com.google.cloud.speech.v1.SpeechClient;
 import com.google.cloud.speech.v1.SpeechRecognitionAlternative;
 import com.google.cloud.speech.v1.SpeechRecognitionResult;
 import com.google.cloud.speech.v1.StreamingRecognitionConfig;
@@ -30,6 +29,7 @@ import com.google.cloud.speech.v1.StreamingRecognizeRequest;
 import com.google.cloud.speech.v1.StreamingRecognizeResponse;
 import com.google.common.util.concurrent.SettableFuture;
 import com.google.protobuf.ByteString;
+import com.google.cloud.speech.spi.v1.SpeechClient;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -248,17 +248,14 @@ public class Recognize {
       private final SettableFuture<List<T>> future = SettableFuture.create();
       private final List<T> messages = new java.util.ArrayList<T>();
 
-      @Override
       public void onNext(T message) {
         messages.add(message);
       }
 
-      @Override
       public void onError(Throwable t) {
         future.setException(t);
       }
 
-      @Override
       public void onCompleted() {
         future.set(messages);
       }
