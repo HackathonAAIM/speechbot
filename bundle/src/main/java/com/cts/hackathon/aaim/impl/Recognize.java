@@ -88,7 +88,7 @@ public class Recognize {
     RecognitionConfig config = RecognitionConfig.newBuilder()
         .setEncoding(AudioEncoding.LINEAR16)
         .setLanguageCode("en-US")
-        .setSampleRateHertz(16000)
+        .setSampleRateHertz(8000)	//.setSampleRateHertz(16000)
         .build();
     RecognitionAudio audio = RecognitionAudio.newBuilder()
         .setContent(audioBytes)
@@ -238,32 +238,41 @@ public class Recognize {
     RecognitionConfig recConfig = RecognitionConfig.newBuilder()
         .setEncoding(AudioEncoding.LINEAR16)
         .setLanguageCode("en-US")
-        .setSampleRateHertz(16000)
+        //.setSampleRateHertz(16000)
         .build();
     StreamingRecognitionConfig config = StreamingRecognitionConfig.newBuilder()
         .setConfig(recConfig)
+        .setInterimResults(true)
+        .setSingleUtterance(true)
         .build();
 
     class ResponseApiStreamingObserver<T> implements ApiStreamObserver<T> {
       private final SettableFuture<List<T>> future = SettableFuture.create();
       private final List<T> messages = new java.util.ArrayList<T>();
-
-      public void onNext(T message) {
-        messages.add(message);
-      }
-
-      public void onError(Throwable t) {
-        future.setException(t);
-      }
-
-      public void onCompleted() {
-        future.set(messages);
-      }
-
+      
+    
       // Returns the SettableFuture object to get received messages / exceptions.
       public SettableFuture<List<T>> future() {
         return future;
       }
+
+
+	public void onNext(T value) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	public void onError(Throwable t) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	public void onCompleted() {
+		// TODO Auto-generated method stub
+		
+	}
     }
 
     ResponseApiStreamingObserver<StreamingRecognizeResponse> responseObserver =
@@ -279,7 +288,6 @@ public class Recognize {
     requestObserver.onNext(StreamingRecognizeRequest.newBuilder()
         .setStreamingConfig(config)
         .build());
-
     // Subsequent requests must **only** contain the audio data.
     requestObserver.onNext(StreamingRecognizeRequest.newBuilder()
         .setAudioContent(ByteString.copyFrom(data))
