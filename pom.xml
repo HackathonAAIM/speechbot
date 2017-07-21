@@ -95,7 +95,7 @@
 			<version>3.0.2</version> </dependency> <dependency> <groupId>edu.stanford.nlp</groupId> 
 			<artifactId>tmt</artifactId> <version>0.2.1</version> </dependency> -->
 
-		<dependency>
+		<!-- <dependency>
 			<groupId>org.apache.opennlp</groupId>
 			<artifactId>opennlp-tools</artifactId>
 			<version>1.8.1</version>
@@ -114,7 +114,7 @@
 			<groupId>org.apache.opennlp</groupId>
 			<artifactId>opennlp-brat-annotator</artifactId>
 			<version>1.8.1</version>
-		</dependency>
+		</dependency> -->
 	</dependencies>
 
 	<repositories>
